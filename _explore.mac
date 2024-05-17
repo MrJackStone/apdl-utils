@@ -1,0 +1,86 @@
+PILECALC
+PILEGEN
+
+/gcmd
+
+/dv3d,dels
+
+/map
+
+number of substeps
+
+8.11. Unstable Structures
+
+2.6. Analysis and Solution Controls
+
+
+
+CUTCONTROL
+CUTCONTROL,NOSHAPE,1
+Tells ANSYS to not do any element shape-checking during the course of a nonlinear analysis.
+
+CUTCONTROL
+  	CUTCONTROL,PIVSTOP,psvalue
+When a negative pivot is encountered, ANSYS usually continues with the analysis.
+Setting psvalue to 1 will cause ANSYS to bisect as soon as a negative pivot is encountered.
+Setting psvalue to 2 will cause ANSYS to stop the solution as soon as a negative pivot is encountered.
+This can be useful, for example, in a nonlinear buckling analysis as a means of determining when a limit load may be reached.
+
+DEBUG
+
+
+dynprompt57.ans
+  	At 5.7, the dynamic input file prompting was introduced, where the command format was displayed as you typed a command.
+
+Modify "dynprompt57.ans" to add your own macro argument format, so when you type your own macros, the proper arguments are also displayed.
+[STI: at 6.0, this file is called "dynprompt60.ans", where the last two numbers indicate the version number.]
+
+
+KEYW
+  	KEYW,PR_SGUI,1
+Supresses "Solution is done" message [5.5.3 and above]
+
+Setting this keyword will not have an adverse effect on the menus, but to be safe, use the above setting for the SOLVE command only, then reset PR_SGUI to zero after SOLVE.
+
+
+LSSOLVE
+  	LSSOLVE,lsmin,lsmax,lsinc,,,,,,1
+The ninth argument, when set to 1, solves load steps lsmin to lsmax with element shape checking disabled. (For related command, see SOLVE undocumented option.)
+
+
+MULTIPRO
+  	Useful means of prompting user for input for multiple variables (a cleaner alternative to *ASK).
+The MULTIPRO macro is located in the "docu" directory (e.g., /ansys55/docu). This allows a user to specify a dialog box to prompt a user for several pieces of info (better alternative than several *ASK commands). View the MULTIPRO.MAC macro in a text editor to see how to use this command.
+(Another nice use for MULTIPRO is a simple OK/Cancel dialog box)
+
+Also, there is the Tcl version of the MULTIPRO macro with a Test macro.
+Lastly, there is also a ANSYS and Tcl (10/20/99) package by John Swanson which covers a lot of applications of Tcl, including multiprompt.tcl.
+
+
+OUTEQ
+  	OUTEQ outputs all results from equilibrium iterations while in /SOLU.
+
+
+   OUTS
+  	OUTS,value
+Controls writing of the jobname.stat file every value minutes (default is 6 minutes). The jobname.stat file is written in batch mode, and it provides the status (analogous to status bar in interactive mode) for some commands which may take a while. For example, for the SOLVE command, it will write out element formation, element solution, and PCG information every value minutes in batch mode. Can be issued in /PREP7 or /SOLU.
+
+
+SMDT
+  	SMDT,option,value
+Change tolernace for solid modeling conditions. Affects all solid modeling operations, so be careful when using these values.
+List of options:
+1 - Tolerance for tesselation
+2 - Tolerance for line on line
+3 - Approx. tolerance
+4 - Tolerance for point coincidence (default 1e-5 or 1e-4 -- e.g., can make tighter to very small dimensions)
+5 - Tolerance for NURBS knot coincidence (default 1e-7, may be difficult to use)
+6 - Tolerance for angle (default 1e-6, may be difficult to use)
+7 - Machine precision tolerance
+...up to 17...
+
+
+SOLVE
+  	SOLVE,,,,,NOCHECK
+Solves without checking elements. Useful to force ANSYS to solve despite elements which produce shape testing errors. It is assumed that the user is able to determine that this is appropriate for his/her situation
+[STI: This arises when "bad" elements exist, most commonly from imported meshes of 3rd party products since ANSYS 'fails to mesh' instead of generating error elements, by default]

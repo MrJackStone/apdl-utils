@@ -1,0 +1,32 @@
+!! gitignore                                                                                      !!
+*.dwl
+*.dwl2
+*.bak
+
+/models/**/*.*
+!**/*.mac
+!**/*.png
+!**/*.txt
+!**/*.md
+!**/*.keep
+
+
+!! file structure                                                                                 !!
+_DATA-template.mac
+MODEL.mac
+ATTR.mac
+SM.mac
+FEM.mac
+BC.mac
+POST.mac
+
+
+!! INIT                                                                                           !!
+parsav,all,'DATA_PARM_BACKUP',parm
+
+finish
+/clear
+/output,'outfile',out
+/uis,msgpop,3
+
+parres,new,'DATA_PARM_BACKUP',parm

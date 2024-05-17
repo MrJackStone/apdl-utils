@@ -1,0 +1,81 @@
+!! Create new folder, change active directory                                                     !!
+/cwd
+/syp,mkdir ,'mytest'
+
+
+!! Section view at working plane                                                                  !!
+/type,1,7
+/cplane,1
+
+
+!! Deactivate 'Solution is done!' and 'Abort' window during solution                              !!
+/gst,OFF
+/uis,abort,off
+keyw,pr_sgui,1
+solve
+keyw,pr_sgui,0
+
+
+!! Undocumented xxINQR commands                                                                   !!
+! ndinqr
+*dim,selnodes,,ndinqr(0,13)
+!elmiqr
+
+
+!! Calculate elapsed time                                                                         !!
+*get,t0,active,,time,wall
+*get,t1,active,,time,wall
+
+elapsedMin=(t1-t0)*60
+
+
+!! Metaprogramming: write file and read it as input                                               !!
+*cfopen,'tmp_lfun',tmp
+    *vwrite,fcnName
+    ('SFE,ALL,1,PRES,,%',A8,'%')
+*cfclos
+/nopr
+/input,'tmp_lfun',tmp
+/delete,'tmp_lfun',tmp
+/gopr
+
+
+!! Metaprogramming: write matrix to file                                                          !!
+*cfopen,mwriteFile,tmp
+    *vwrite,'*mwrite,disp(1,1),,,,JIK,MaxIndex,StepNumber+1,1'
+    %s
+    *vwrite,'(%MaxIndex%E15.5)'
+    %s
+*cfclos
+/nopr
+/output,'DISPLACEMENT',txt,,APPEND
+/input,mwriteFile,tmp
+/output
+/delete,mwriteFile,tmp
+/gopr
+
+
+!! Default Time-History initialization                                                            !!
+/post26
+numvar,200
+solu,191,ncmit
+store,merge
+filldata,191,,,,1,1
+realvar,191,191
+
+
+!! On-screen text: change font & thickness                                                        !!
+/device,font,3,Arial,1000,0,-21,0,0,,, ! Annotation font
+/device,font,1,Arial,1000,0,-21,0,0,,, ! Legend font
+/device,text,1,100                     ! Legend size (default = 100)
+
+
+!! Automatic exported image naming: remove serial number after jobname                            !!
+! https://caeai.com/sites/default/files/automated_postprocessing.pdf
+! It may be convenient to rename the plot files something more descriptive than just jobname000.jpg.
+! The problem is that you cannot be sure what number plot you are up to.
+! To address this there is a command to turn OFF automatic numbering
+/devdisp,psfn,ninc
+
+! To re-enable automatic numbering, issue>
+/devdisp,psfn,noninc

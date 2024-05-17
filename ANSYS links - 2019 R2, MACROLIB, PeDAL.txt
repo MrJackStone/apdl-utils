@@ -1,0 +1,17 @@
+ANSYS LINKS:
+
+ANSYS 2019 R2 installation
+https://drive.google.com/file/d/1IwNEMnf7q2PCd8_gbj-RmqnwcgswNtzS/view?usp=drive_link 
+
+
+PeDAL APDL code editor: installation & integration with ANSYS docs
+https://drive.google.com/file/d/17m8Pa678opuaUwpS4m8Q8mGOaGwLfomk/view?usp=sharing
+
+
+ANSYS_MACROLIB: using subroutines in ANSYS
+https://drive.google.com/file/d/1GKBv77iPaVUfIGebuSoWEIKc38eDrE-y/view?usp=sharing
+
+
+Learning resources:
+https://drive.google.com/drive/folders/1McmZ078YZ7l8nm0301cKpMqUV2Zd2wed?usp=sharing
+
