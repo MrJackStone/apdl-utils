@@ -1,0 +1,38 @@
+
+/annot   , dele
+WINTITLE , 1    , 'LJ title' , 'centered TITLE' , 'right justified title' , 0 , 0 , 14
+WINTITLE , 1    , 'mid...'   , 'height...'      , 'TITLE\%'               , 1 , 0 , 15
+WINTITLE , 1    , 'TOP----'  , '*****of*****'   , 'THE WINDOW?\%'         , 2 , 1 , -1
+/replot
+
+/pspec
+
+dx=2.67/16
+dy=2/16
+xi=-1
+yi=-1
+view1w
+/annot,dele
+*do,i,0,15,1
+  xe=xi+dx
+  yi=-1
+  *do,j,0,15,1
+    ye=yi+dy
+    /pspec,i,1,1
+    p4gon,xi,yi,xe,ye
+    /tspec,j,1,4
+    ts=strcat(chrval(i),strcat('-',chrval(j)))
+    /tlabel,xi+0.02,yi+0.02,%ts%
+    ! *cfopen,temp,tmp
+    !   *vwrite,xi+0.02,yi+0.02,ts
+    !   $/tlabel,%g,%g,%s
+    ! *cfclos
+    ! /nopr
+    ! /input,temp,tmp
+    ! /gopr
+    yi=ye
+  *enddo
+  xi=xe
+*enddo
+
+sftran
