@@ -30,3 +30,10 @@ finish
 /uis,msgpop,3
 
 parres,new,'DATA_PARM_BACKUP',parm
+
+
+!!                                                                                                !!
+finish
+/psearch,'./../../'
+
+_MODEL
